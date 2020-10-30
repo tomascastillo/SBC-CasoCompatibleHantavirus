@@ -1,0 +1,48 @@
+//created on: 27/09/2020
+package rules1
+
+import model.Diagnostico
+import model.Persona
+import model.Roedor
+import model.Especie
+import model.Sintomas
+import model.DiagnosticoFinal
+import model.PresentaSintomasIniciales
+import model.TieneRiesgoDeContagio
+import model.TieneFiebre
+rule "R1"
+
+    when
+        $persona:Persona(temperaturaCorporal > 38,sintomas.tieneFiebre.isa(TieneFiebre.NO_DETERMINADO))
+    then
+		modify($persona) {
+    		sintomas.setTieneFiebre(TieneFiebre.SI)    		
+    	}
+end
+
+rule "R2"
+    when
+         $persona:Persona(tuvoContactoConRoedor==true ||  tuvoContactoConPersonaInfectada == true || inhaloHecesRoedor == true || fueMordidoPorRoedor == true)
+    then
+	    modify($persona) {
+	    	 setTieneRiesgoDeContagio(TieneRiesgoDeContagio.SI) 		
+    	}
+end
+
+rule "R3"
+    when
+   		$persona:Persona( sintomas.tieneFiebre.isa(TieneFiebre.SI)||sintomas.tieneVomitos==true||sintomas.presentaDolorMuscular==true|| sintomas.presentaDolorAbdominal==true|| sintomas.presentaFaltaDeAire==true|| sintomas.presentaDolorDeCabeza==true||sintomas.presentaDolorParteBajaDeLaColumna==true|| sintomas.tieneDiarrea==true|| sintomas.tieneNauseas==true)
+    then
+    	modify($persona) {
+    		setPresentaSintomasIniciales(PresentaSintomasIniciales.SI)
+		}
+end
+
+rule "R4"   
+    when
+        $persona:Persona(presentaSintomasIniciales==PresentaSintomasIniciales.SI && tieneRiesgoDeContagio ==TieneRiesgoDeContagio.SI)
+    then
+        modify($persona) {
+    		setDiagnosticoFinal(DiagnosticoFinal.COMPATIBLE_CASO_HANTAVIRUS)  		
+    	}
+end
