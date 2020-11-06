@@ -14,15 +14,18 @@ rule "R1"
 
     when
         $persona:Persona(temperaturaCorporal > 38,sintomas.tieneFiebre.isa(TieneFiebre.NO_DETERMINADO))
+        // Se agrega valor por default de los valores que vamos a modificar para evitar loops infinitos de la misma regla
     then
 		modify($persona) {
     		sintomas.setTieneFiebre(TieneFiebre.SI)    		
     	}
+    	// el atributo que modifico debe ser publico en el concepto para que la base de hechos pueda acceder y detectar la modificacion
+    	   
 end
 
 rule "R2"
     when
-         $persona:Persona(tuvoContactoConRoedor==true ||  tuvoContactoConPersonaInfectada == true || inhaloHecesRoedor == true || fueMordidoPorRoedor == true)
+         $persona:Persona(roedor.especie==Especie.COLILARGO&&(tuvoContactoConRoedor==true ||  tuvoContactoConPersonaInfectada == true || inhaloHecesRoedor == true || fueMordidoPorRoedor == true))
     then
 	    modify($persona) {
 	    	 setTieneRiesgoDeContagio(TieneRiesgoDeContagio.SI) 		

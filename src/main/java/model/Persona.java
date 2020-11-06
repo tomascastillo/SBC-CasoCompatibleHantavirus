@@ -14,6 +14,14 @@ public class Persona {
 	PresentaSintomasIniciales presentaSintomasIniciales;
 	Integer temperaturaCorporal;
 	Diagnostico diagnostico;
+	Roedor roedor;
+	
+	public Roedor getRoedor() {
+		return roedor;
+	}
+	public void setRoedor(Roedor roedor) {
+		this.roedor = roedor;
+	}
 	public Boolean getTuvoContactoConRoedor() {
 		return tuvoContactoConRoedor;
 	}
@@ -62,6 +70,7 @@ public class Persona {
 		diagnostico = new Diagnostico();
 		sintomas.setTieneFiebre(TieneFiebre.NO_DETERMINADO);
 		this.presentaSintomasIniciales=PresentaSintomasIniciales.NO_DETERMINADO;
+		this.tieneRiesgoDeContagio=TieneRiesgoDeContagio.NO_DETERMINADO;
 		
 	}
 	public Sintomas getSintomas() {
@@ -100,11 +109,11 @@ public class Persona {
 	}
 	@Override
 	public String toString() {
-		return "Persona [tuvoContactoConRoedor=" + tuvoContactoConRoedor + ", tuvoContactoConPersonaInfectada="
+		return "Persona= [tuvoContactoConRoedor=" + tuvoContactoConRoedor + ", tuvoContactoConPersonaInfectada="
 				+ tuvoContactoConPersonaInfectada + ", inhaloHecesRoedor=" + inhaloHecesRoedor
 				+ ", fueMordidoPorRoedor=" + fueMordidoPorRoedor + ", tieneRiesgoDeContagio=" + tieneRiesgoDeContagio
-				+ ", presentaSintomasIniciales=" + presentaSintomasIniciales + ", temperaturaCorporal="
-				+ temperaturaCorporal + ", sintomas=" + sintomas.toString() +"\nDIAG FINAL: " +diagnostico.toString()+"]";
+				+ ",\n presentaSintomasIniciales=" + presentaSintomasIniciales + ", temperaturaCorporal="
+				+ temperaturaCorporal + ", \nRoedor="+roedor.toString()+"\nsintomas=" + sintomas.toString() +"\nDiagnostico: " +diagnostico.toString()+"]";
 	}
 	
 	

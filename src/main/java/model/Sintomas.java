@@ -83,10 +83,10 @@ public class Sintomas {
 	}
 	@Override
 	public String toString() {
-		return "Sintomas [presentaDolorMuscular=" + presentaDolorMuscular + ", presentaDolorAbdominal="
+		return "Sintomas= [presentaDolorMuscular=" + presentaDolorMuscular + ", presentaDolorAbdominal="
 				+ presentaDolorAbdominal + ", presentaFaltaDeAire=" + presentaFaltaDeAire + ", presentaDolorDeCabeza="
 				+ presentaDolorDeCabeza + ", presentaDolorParteBajaDeLaColumna=" + presentaDolorParteBajaDeLaColumna
-				+ ", tieneDiarrea=" + tieneDiarrea + ", tieneNauseas=" + tieneNauseas + ", tieneVomitos=" + tieneVomitos
+				+ ",\n tieneDiarrea=" + tieneDiarrea + ", tieneNauseas=" + tieneNauseas + ", tieneVomitos=" + tieneVomitos
 				+ ", tieneFiebre=" + tieneFiebre + "]";
 	}
 	
